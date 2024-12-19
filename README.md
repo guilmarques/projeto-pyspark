@@ -12,7 +12,7 @@ projeto-pyspark/
 │   ├── processor.py          # Classe EventProcessor
 │   ├── aggregator.py         # Classe Aggregator
 │   ├── writer.py             # Classe Writer
-│   └── utils.py              # Funções auxiliares (se necessário)
+│   └── utils.py              # Funções auxiliares 
 ├── data/                     # Diretório para arquivos de entrada e saída
 ├── tests/                    # Diretório contendo os testes unitários
 │   ├── test_processor.py     # Testes para EventProcessor
@@ -91,7 +91,7 @@ projeto-pyspark/
      ./spark-submit.sh
      ```
 
-3. **(Caso optou por executar sem docker) Executar com Python**:
+3. **(Caso opte por executar sem docker) Executar com Python**:
    ```bash
    python main.py
    ```
@@ -111,7 +111,7 @@ projeto-pyspark/
      docker run -it --entrypoint /bin/bash -v $(pwd)/data:/app/data pyspark-pipeline:latest
      pytest tests/
      ```
-   **1.2** (Caso opte por ambiente local) No ambiente local:
+   **1.2** (Caso opte por ambiente local sem docker) No ambiente local:
      ```bash
      pytest tests/
      ```
@@ -127,7 +127,7 @@ projeto-pyspark/
      docker run -it --entrypoint /bin/bash -v $(pwd)/data:/app/data pyspark-pipeline:latest
      pytest --cov=app tests/
      ```
-   **2.2** (Caso opte por ambiente local) Para verificar a cobertura dos testes no ambiente local, execute:
+   **2.2** (Caso opte por ambiente local sem docker) Para verificar a cobertura dos testes no ambiente local, execute:
       ```bash
         pytest --cov=app tests/
       ```
