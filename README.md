@@ -160,7 +160,7 @@ Para ler os resultados pode-se usar o mesmo container, apenas entre nele no modo
 
 **3.** Fluxo de Execução:
 Durante o desenvolvimento, use Docker localmente.
-Caso queira fazer deploy em produção com o kubernetes por exemplo:
+Caso queira fazer deploy em produção com o kubernetes deixei um exemplo:
 - Construa e publique a imagem Docker (utilizar a imagem que está no projeto).
 - Configurar Kubernetes (exemplo: clusters EKS, GKE ou AKS).
 - Substituir no arquivo "spark-submit.sh" os valores <kubernetes-api-url> e <docker-image-url> pelos valores do seu cluster e imagem.
