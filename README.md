@@ -18,7 +18,7 @@ projeto-pyspark/
 │   ├── test_processor.py     # Testes para EventProcessor
 │   ├── test_aggregator.py    # Testes para Aggregator
 │   └── test_writer.py        # Testes para Writer
-│   └── conftest.py        # Arquivo de configura;'ao comum para todos os testes
+│   └── conftest.py           # Arquivo de configuração comum para todos os testes
 ├── requirements.txt          # Dependências do projeto
 ├── spark-submit.sh           # Script para submissão em clusters Kubernetes
 ├── README.md                 # Documentação do projeto
@@ -39,7 +39,7 @@ projeto-pyspark/
      sudo systemctl enable docker
      ```
    - **Instalar no Windows/Mac**: Baixe o [Docker Desktop](https://www.docker.com/products/docker-desktop) e siga as instruções de instalação.
-3. **Java**: Certifique-se de ter o Java JDK 8 ou superior instalado (necessário para PySpark).
+3. **Java**: Caso opte por testar local sem docker, certifique-se de ter o Java JDK 8 ou superior instalado (necessário para PySpark).
 4. **Kubernetes** (opcional, para execução em cluster):
    - Instale o `kubectl` seguindo a [documentação oficial](https://kubernetes.io/docs/tasks/tools/).
 
@@ -75,7 +75,7 @@ projeto-pyspark/
    ```bash
    docker run --rm -v $(pwd)/data:/app/data pyspark-pipeline:latest
    ```
-   Caso prefira pode interagir com o container entrando nele e executando o comando **python3 main.py**. Para entrar no container utilize
+   Caso prefira pode interagir com o container entrando nele e executando o comando **python3 main.py** logo após entrar. Para entrar no container utilize:
    ```bash
    docker run -it --entrypoint /bin/bash -v $(pwd)/data:/app/data pyspark-pipeline:latest
    ```
@@ -106,8 +106,9 @@ projeto-pyspark/
    ```bash
    docker run --rm --entrypoint pytest -v $(pwd)/data:/app/data pyspark-pipeline:latest tests/
    ```
-   Ou entre no container com o comando que esta no paragrafo/sessao acima e execute:
+   Ou entre no container executando os dois comandos em ordem:
      ```bash
+     docker run -it --entrypoint /bin/bash -v $(pwd)/data:/app/data pyspark-pipeline:latest
      pytest tests/
      ```
    **1.2** (Caso opte por ambiente local) No ambiente local:
@@ -121,8 +122,9 @@ projeto-pyspark/
    ```bash
    docker run --rm --entrypoint pytest -v $(pwd)/data:/app/data pyspark-pipeline:latest --cov=app tests/
    ```
-   Ou entre no container com o comando que esta no paragrafo/sessao acima e execute:
+   Ou entre no container executando os dois comandos em ordem:
      ```bash
+     docker run -it --entrypoint /bin/bash -v $(pwd)/data:/app/data pyspark-pipeline:latest
      pytest --cov=app tests/
      ```
    **2.2** (Caso opte por ambiente local) Para verificar a cobertura dos testes no ambiente local, execute:
@@ -137,8 +139,8 @@ projeto-pyspark/
 1. Sobre o código:
 
 - O código está contemplando exatamente o que o enunciado pede, lendo o input.json e gerando o arquivo parquet de saída, dá para fazer a leitura das estruturas usando streaming com o Kafka por exemplo usando o readStream(), dá para ler a partir de uma fila do SQS por exemplo, onde mostra quais arquivos json chegaram em ordem, bem como quais não foram processados ainda e com isso o código lê cada um dos arquivos que estão na fila nomeados e etc.
-- No processor.py eu fiz o metodo que voces pediram para filtrar os dados como mencionado, porem eu entendi que no metodo process_events da classe Processor nao era para retornar o dataframe com o filtro para as agregacoes, portanto o metodo de filtrar ficou sem uso, deixei no codigo para voces verem que funciona, mas nao retorno ele no return do metodo (Vide comentario na linha 49 do arquivo processor.py).
-- O input_data.json deve ficar dentro da pasta /data para o codigo ler com sucesso. Os resultados ficam na pasta data/output (coloquei um dataframe para o dado processado enriquecido particionando pelo estado origem e destino e mais outros 3 de agregacoes gerados pelo metodo agregator separados pelas respectivas pastas).
+- No processor.py eu fiz o método que foi pedido para filtrar os dados como mencionado, porém eu entendi que no método process_events da classe Processor não era para retornar o dataframe com o filtro para as agregacoes, portanto o método de filtrar ficou sem uso, deixei no código para verificarem que funciona, mas não coloco ele no return do método (Vide comentário na linha 49 do arquivo processor.py).
+- O input_data.json deve ficar dentro da pasta /data para o código ler com sucesso. Os resultados ficam na pasta data/output (coloquei um dataframe para o dado processado enriquecido particionando pelo estado origem e destino e mais outros 3 de agregações geradas pelo metodo agregator separados pelas respectivas pastas).
 
 2. Fluxo de Execução:
 Durante o desenvolvimento, use Docker localmente.
