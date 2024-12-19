@@ -142,7 +142,21 @@ projeto-pyspark/
 - No processor.py eu fiz o método que foi pedido para filtrar os dados como mencionado, porém eu entendi que no método process_events da classe Processor não era para retornar o dataframe com o filtro para as agregacoes, portanto o método de filtrar ficou sem uso, deixei no código para verificarem que funciona, mas não coloco ele no return do método (Vide comentário na linha 49 do arquivo processor.py).
 - O input_data.json deve ficar dentro da pasta /data para o código ler com sucesso. Os resultados ficam na pasta data/output (coloquei um dataframe para o dado processado enriquecido particionando pelo estado origem e destino e mais outros 3 de agregações geradas pelo metodo agregator separados pelas respectivas pastas).
 
-2. Fluxo de Execução:
+2. Ler resultados?
+Para ler os resultados pode-se usar o mesmo container, apenas entre nele no modo interativo no bash e digite pyspark, dentro do pyspark pode fazer os comandos de  leitura (vide screenshot a seguir).
+>>> df = spark.read.parquet('data/output/avg_price')
+>>> df.show()
+>>> df = spark.read.parquet('data/output/most_popular_route')
+>>> df.show()
+>>> df = spark.read.parquet('data/output/total_seats')
+>>> df.show()
+>>> df = spark.read.parquet('data/output/processed_data')
+>>> df.show()
+
+![Screenshot from 2024-12-19 04-45-35](https://github.com/user-attachments/assets/eb2f5167-5a29-475f-81da-6f0c3e1d9330)
+
+
+3. Fluxo de Execução:
 Durante o desenvolvimento, use Docker localmente.
 Caso queira fazer deploy em produção com o kubernetes por exemplo:
 - Construa e publique a imagem Docker (utilizar a imagem que está no projeto).
@@ -150,7 +164,7 @@ Caso queira fazer deploy em produção com o kubernetes por exemplo:
 - Substituir no arquivo "spark-submit.sh" os valores <kubernetes-api-url> e <docker-image-url> pelos valores do seu cluster e imagem.
 - Submeta o job usando o spark-submit.sh.
 
-3. Armazenamento de Dados Para facilitar a compatibilidade:
+4. Armazenamento de Dados Para facilitar a compatibilidade:
 
 - Volumes no Docker para leitura/escrita de dados localmente.
 - No Kubernetes, configurar Persistent Volumes (PV) para armazenamento compartilhado entre pods.
