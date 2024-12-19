@@ -144,14 +144,16 @@ projeto-pyspark/
 
 2. Ler resultados?
 Para ler os resultados pode-se usar o mesmo container, apenas entre nele no modo interativo no bash e digite pyspark, dentro do pyspark pode fazer os comandos de  leitura (vide screenshot a seguir).
->>> df = spark.read.parquet('data/output/avg_price')
->>> df.show()
->>> df = spark.read.parquet('data/output/most_popular_route')
->>> df.show()
->>> df = spark.read.parquet('data/output/total_seats')
->>> df.show()
->>> df = spark.read.parquet('data/output/processed_data')
->>> df.show()
+ ```bash
+ df = spark.read.parquet('data/output/avg_price')
+ df.show()
+ df = spark.read.parquet('data/output/most_popular_route')
+ df.show()
+ df = spark.read.parquet('data/output/total_seats')
+ df.show()
+ df = spark.read.parquet('data/output/processed_data')
+ df.show()
+ ```
 
 ![Screenshot from 2024-12-19 04-45-35](https://github.com/user-attachments/assets/eb2f5167-5a29-475f-81da-6f0c3e1d9330)
 
