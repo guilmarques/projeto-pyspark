@@ -102,7 +102,7 @@ projeto-pyspark/
 
 1. **Executar Testes**:
    
-    **1.1** No Docker, utilize o comando
+    **1.1** Com Docker, utilize o comando
    ```bash
    docker run --rm --entrypoint pytest -v $(pwd)/data:/app/data pyspark-pipeline:latest tests/
    ```
@@ -118,7 +118,7 @@ projeto-pyspark/
 
 2. **Cobertura de Testes**:
    
-    **2.1** No Docker, utilize o comando
+    **2.1** Com Docker, utilize o comando
    ```bash
    docker run --rm --entrypoint pytest -v $(pwd)/data:/app/data pyspark-pipeline:latest --cov=app tests/
    ```
